@@ -105,4 +105,8 @@ public class Animation {
 		return stopped;
 	}
 
+	protected int getCurrentFrame() {
+		return currentFrame;
+	}
+
 }
