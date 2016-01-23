@@ -109,4 +109,8 @@ public class Animation {
 		return currentFrame;
 	}
 
+	public int getFrameDelay() {
+		return frameDelay;
+	}
+
 }

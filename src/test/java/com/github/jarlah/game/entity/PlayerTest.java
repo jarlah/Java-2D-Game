@@ -18,15 +18,13 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_LEFT);
 		player.keyPressed(KeyEvent.VK_RIGHT);
 		player.update();
 		
 		// Then:
 		assertEquals(x - speed, player.x, 0); 
-		assertEquals(player.animation, player.walkLeftAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_LEFT, player.state);
 	}
 	
 	@Test
@@ -35,15 +33,13 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_UP);
 		player.keyPressed(KeyEvent.VK_DOWN);
 		player.update();
 		
 		// Then:
 		assertEquals(y - speed, player.y, 0); 
-		assertEquals(player.animation, player.walkUpAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_UP, player.state);
 	}
 	
 	@Test
@@ -52,17 +48,15 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_LEFT);
 		player.update();
 		
 		// Then:
 		assertEquals(x - speed, player.x, 0); 
-		assertEquals(player.animation, player.walkLeftAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_LEFT, player.state);
 		player.keyReleased(KeyEvent.VK_LEFT);
-		assertEquals(player.animation, player.standingAn);
-		assertTrue(player.animation.isStopped());
+		player.update();
+		assertEquals(PlayerStateEngine.STANDING, player.state);
 	}
 	
 	@Test
@@ -71,17 +65,15 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_RIGHT);
 		player.update();
 		
 		// Then:
 		assertEquals(x + speed, player.x, 0); 
-		assertEquals(player.animation, player.walkRightAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_RIGHT, player.state);
 		player.keyReleased(KeyEvent.VK_RIGHT);
-		assertEquals(player.animation, player.standingAn);
-		assertTrue(player.animation.isStopped());
+		player.update();
+		assertEquals(PlayerStateEngine.STANDING, player.state);
 	}
 	
 	@Test
@@ -90,20 +82,15 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_UP);
 		player.update();
 		
 		// Then:
 		assertEquals(y - speed, player.y, 0); 
-		assertEquals(player.animation, player.walkUpAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_UP, player.state);
 		player.keyReleased(KeyEvent.VK_UP);
-		assertEquals(player.animation, player.standingAn);
-		assertTrue(player.animation.isStopped());
-		player.keyReleased(KeyEvent.VK_UP);
-		assertEquals(player.animation, player.standingAn);
-		assertTrue(player.animation.isStopped());
+		player.update();
+		assertEquals(PlayerStateEngine.STANDING, player.state);
 	}
 	
 	@Test
@@ -112,16 +99,14 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
-		assertTrue(player.animation.isStopped());
 		player.keyPressed(KeyEvent.VK_DOWN);
 		player.update();
 		
 		// Then:
 		assertEquals(y + speed, player.y, 0); 
-		assertEquals(player.animation, player.walkDownAn);
-		assertFalse(player.animation.isStopped());
+		assertEquals(PlayerStateEngine.WALKING_DOWN, player.state);
 		player.keyReleased(KeyEvent.VK_DOWN);
-		assertEquals(player.animation, player.standingAn);
-		assertTrue(player.animation.isStopped());
+		player.update();
+		assertEquals(PlayerStateEngine.STANDING, player.state);
 	}
 }

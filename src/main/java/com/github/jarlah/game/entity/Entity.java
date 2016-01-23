@@ -10,6 +10,7 @@ public abstract class Entity {
 	protected boolean right;
 	protected boolean up;
 	protected boolean down;
+	protected PlayerState state;
 	
 	public Entity(double speed, double x, double y) {
 		this.speed = speed;
