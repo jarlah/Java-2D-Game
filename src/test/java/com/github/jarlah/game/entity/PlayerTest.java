@@ -41,7 +41,7 @@ public class PlayerTest {
 		player.update();
 		
 		// Then:
-		assertEquals(x, player.x, 0); 
+		assertEquals(y, player.y, 0); 
 		assertEquals(player.animation, player.walkDownAn);
 		assertTrue(player.animation.isStopped());
 	}
