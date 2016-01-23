@@ -12,8 +12,8 @@ public class Player extends Entity {
 	private static final int HEIGHT = 32;
 	
 	// Images for each animation
-	private BufferedImage[] walkingUp = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 0), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 0)};
-	private BufferedImage[] walkingDown = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 3), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 3)};
+	private BufferedImage[] walkingDown = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 0), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 0)};
+	private BufferedImage[] walkingUp = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 3), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 3)};
 	private BufferedImage[] walkingLeft = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 1), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 1)};
 	private BufferedImage[] walkingRight = {Sprites.getSprite("player", WIDTH, HEIGHT, 0, 2), Sprites.getSprite("player", WIDTH, HEIGHT, 2, 2)};
 	private BufferedImage[] standing = {Sprites.getSprite("player", WIDTH, HEIGHT, 1, 0)};
@@ -47,6 +47,8 @@ public class Player extends Entity {
 				if (left = !released) {
 					animation = walkLeftAn;
 				    animation.start();
+				} else {
+					resetAnimation();
 				}
 				break;
 			case KeyEvent.VK_D:
@@ -54,6 +56,8 @@ public class Player extends Entity {
 				if (right = !released) {
 					animation = walkRightAn;
 				    animation.start();
+				} else {
+					resetAnimation();
 				}
 				break;
 			case KeyEvent.VK_W:
@@ -61,6 +65,8 @@ public class Player extends Entity {
 				if (up = !released) {
 					animation = walkUpAn;
 				    animation.start();
+				} else {
+					resetAnimation();
 				}
 				break;
 			case KeyEvent.VK_S:
@@ -68,14 +74,44 @@ public class Player extends Entity {
 				if (down = !released) {
 					animation = walkDownAn;
 				    animation.start();
+				} else {
+					resetAnimation();
 				}
 				break;
 			default:
-				animation.stop();
-				animation.reset();
-				animation = standingAn;
+				resetAnimation();
 				break;
 		}
+	}
+
+	/**
+	 * Reset animation to the active direction or set animation to standing
+	 */
+	private void resetAnimation() {
+		if (left) {
+			onKeyEvent(KeyEvent.VK_LEFT, false);
+			return;
+		}
+		if (right) {
+			onKeyEvent(KeyEvent.VK_RIGHT, false);
+			return;
+		}
+		if (up) {
+			onKeyEvent(KeyEvent.VK_UP, false);
+			return;
+		}
+		if (down) {
+			onKeyEvent(KeyEvent.VK_DOWN, false);
+			return;
+		}
+
+		setStandingAnimation();
+	}
+
+	private void setStandingAnimation() {
+		animation.stop();
+		animation.reset();
+		animation = standingAn;
 	}
 
 	public void update() {
@@ -83,13 +119,18 @@ public class Player extends Entity {
 		
 		double xa = 0, ya = 0;
 		
-		if (left) xa = -speed;
-		else if (right) xa = speed;
-		if (up) ya = -speed;
-		else if (down) ya = speed;
+		if (left) xa += -speed;
+		if (right) xa += speed;
+		if (up) ya += -speed;
+		if (down) ya += speed;
 		
-		x += xa;
-		y += ya;
+		if (xa != 0 || ya != 0) {
+			x += xa;
+			y += ya;
+			animation.start();
+		} else {
+			animation.stop();
+		}
 	}
 
 	@Override

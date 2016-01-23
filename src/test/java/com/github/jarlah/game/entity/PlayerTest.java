@@ -26,6 +26,9 @@ public class PlayerTest {
 		assertEquals(x - speed, player.x, 0); 
 		assertEquals(player.animation, player.walkLeftAn);
 		assertFalse(player.animation.isStopped());
+		player.keyReleased(KeyEvent.VK_LEFT);
+		assertEquals(player.animation, player.standingAn);
+		assertTrue(player.animation.isStopped());
 	}
 	
 	@Test
@@ -42,6 +45,9 @@ public class PlayerTest {
 		assertEquals(x + speed, player.x, 0); 
 		assertEquals(player.animation, player.walkRightAn);
 		assertFalse(player.animation.isStopped());
+		player.keyReleased(KeyEvent.VK_RIGHT);
+		assertEquals(player.animation, player.standingAn);
+		assertTrue(player.animation.isStopped());
 	}
 	
 	@Test
@@ -58,6 +64,12 @@ public class PlayerTest {
 		assertEquals(y - speed, player.y, 0); 
 		assertEquals(player.animation, player.walkUpAn);
 		assertFalse(player.animation.isStopped());
+		player.keyReleased(KeyEvent.VK_UP);
+		assertEquals(player.animation, player.standingAn);
+		assertTrue(player.animation.isStopped());
+		player.keyReleased(KeyEvent.VK_UP);
+		assertEquals(player.animation, player.standingAn);
+		assertTrue(player.animation.isStopped());
 	}
 	
 	@Test
@@ -74,5 +86,8 @@ public class PlayerTest {
 		assertEquals(y + speed, player.y, 0); 
 		assertEquals(player.animation, player.walkDownAn);
 		assertFalse(player.animation.isStopped());
+		player.keyReleased(KeyEvent.VK_DOWN);
+		assertEquals(player.animation, player.standingAn);
+		assertTrue(player.animation.isStopped());
 	}
 }
