@@ -13,7 +13,7 @@ public class PlayerTest {
 	double y = 124.0;
 	
 	@Test
-	public void playerStopsWhenBothLeftAndRightIsPressed() {
+	public void pressingRightWhileGoingLeftHasNoEfect() {
 		// Given:
 		Player player = new Player(speed, x, y);
 		
@@ -24,13 +24,13 @@ public class PlayerTest {
 		player.update();
 		
 		// Then:
-		assertEquals(x, player.x, 0); 
-		assertEquals(player.animation, player.walkRightAn);
-		assertTrue(player.animation.isStopped());
+		assertEquals(x - speed, player.x, 0); 
+		assertEquals(player.animation, player.walkLeftAn);
+		assertFalse(player.animation.isStopped());
 	}
 	
 	@Test
-	public void playerStopsWhenBothUpAndDownIsPressed() {
+	public void pressingDownWhileGoingUpHasNoEfect() {
 		// Given:
 		Player player = new Player(speed, x, y);
 		
@@ -41,9 +41,9 @@ public class PlayerTest {
 		player.update();
 		
 		// Then:
-		assertEquals(y, player.y, 0); 
-		assertEquals(player.animation, player.walkDownAn);
-		assertTrue(player.animation.isStopped());
+		assertEquals(y - speed, player.y, 0); 
+		assertEquals(player.animation, player.walkUpAn);
+		assertFalse(player.animation.isStopped());
 	}
 	
 	@Test

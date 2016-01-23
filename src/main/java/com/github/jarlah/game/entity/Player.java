@@ -44,7 +44,7 @@ public class Player extends Entity {
 		switch(code) {
 			case KeyEvent.VK_A:
 			case KeyEvent.VK_LEFT:
-				if (left = !released) {
+				if (!right && (left = !released)) {
 					animation = walkLeftAn;
 				    animation.start();
 				} else {
@@ -53,7 +53,7 @@ public class Player extends Entity {
 				break;
 			case KeyEvent.VK_D:
 			case KeyEvent.VK_RIGHT:
-				if (right = !released) {
+				if (!left && (right = !released)) {
 					animation = walkRightAn;
 				    animation.start();
 				} else {
@@ -62,7 +62,7 @@ public class Player extends Entity {
 				break;
 			case KeyEvent.VK_W:
 			case KeyEvent.VK_UP:
-				if (up = !released) {
+				if (!down && (up = !released)) {
 					animation = walkUpAn;
 				    animation.start();
 				} else {
@@ -71,7 +71,7 @@ public class Player extends Entity {
 				break;
 			case KeyEvent.VK_S:
 			case KeyEvent.VK_DOWN:
-				if (down = !released) {
+				if (!up && (down = !released)) {
 					animation = walkDownAn;
 				    animation.start();
 				} else {
