@@ -9,9 +9,9 @@ import com.github.jarlah.game.gfx.Sprites;
 
 public class Player extends Entity {
 	// Images for each animation
-	private BufferedImage[] walkingUp = {Sprites.getSprite("player", 0, 0), Sprites.getSprite("player", 2, 0)}; // Gets the upper left images of my sprite sheet
+	private BufferedImage[] walkingUp = {Sprites.getSprite("player", 0, 0), Sprites.getSprite("player", 2, 0)};
 	private BufferedImage[] walkingDown = {Sprites.getSprite("player", 0, 3), Sprites.getSprite("player", 2, 3)};
-	private BufferedImage[] walkingLeft = {Sprites.getSprite("player", 0, 1), Sprites.getSprite("player", 2, 1)}; // Gets the upper left images of my sprite sheet
+	private BufferedImage[] walkingLeft = {Sprites.getSprite("player", 0, 1), Sprites.getSprite("player", 2, 1)};
 	private BufferedImage[] walkingRight = {Sprites.getSprite("player", 0, 2), Sprites.getSprite("player", 2, 2)};
 	private BufferedImage[] standing = {Sprites.getSprite("player", 1, 0)};
 
