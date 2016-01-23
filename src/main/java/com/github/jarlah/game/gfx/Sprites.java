@@ -9,8 +9,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class Sprites {
-    private static final int TILE_SIZE = 32;
-
     private static Map<String, BufferedImage> spriteSheets;
 
     public static BufferedImage loadSprite(String file) {
@@ -26,14 +24,14 @@ public class Sprites {
         return sprite;
     }
 
-    public static BufferedImage getSprite(String path, int xGrid, int yGrid) {
+    public static BufferedImage getSprite(String path, int width, int height, int xGrid, int yGrid) {
 
         if (spriteSheets == null) {
         	spriteSheets = new HashMap<>();
             spriteSheets.put(path, loadSprite(path));
         }
 
-        return spriteSheets.get(path).getSubimage(xGrid * TILE_SIZE, yGrid * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        return spriteSheets.get(path).getSubimage(xGrid * width, yGrid * height, width, height);
     }
 
 }
