@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -16,7 +18,7 @@ import javax.swing.JFrame;
 
 import com.github.jarlah.game.entity.Player;
 
-public class Game extends Loop implements KeyListener, MouseListener, MouseMotionListener{
+public class Game extends Loop implements KeyListener, MouseListener, MouseMotionListener, FocusListener {
 	private final static String TITLE = "Rain";
 	
 	private final JFrame window;
@@ -43,6 +45,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 		this.canvas.addMouseMotionListener(this);
 		this.player = new Player(1.4, 100, 100);
 		this.canvas.requestFocus();
+		this.canvas.addFocusListener(this);
 	}
 	
 	public static void main(String[] args) {
@@ -69,6 +72,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 		player.render(g2d);
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		window.setTitle(TITLE + " | " + getFps() + " fps, " + getUps() + " update" + (getUps() > 1 ? " catchup" : "") + " per render");
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
 		bs.show();
@@ -130,6 +134,17 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 	@Override
 	public void keyReleased(KeyEvent e) {
 		player.keyReleased(e.getKeyCode());
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		resume();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		player.stop();
+		pause();
 	}
 
 }

@@ -9,7 +9,7 @@ public abstract class Loop implements Runnable {
 	
 	private final String name;
 	private Thread thread;
-	private boolean running;
+	private boolean running, paused;
 	private int fps, ups;
 	
 	public Loop(String name) {
@@ -42,39 +42,43 @@ public abstract class Loop implements Runnable {
 		int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
 		while (running) {
-			double now = System.nanoTime();
-			int updateCount = 0;
-
-			while (now - lastUpdateTime > TIME_BETWEEN_UPDATES
-					&& updateCount < MAX_UPDATES_BEFORE_RENDER) {
-				update();
-				lastUpdateTime += TIME_BETWEEN_UPDATES;
-				updateCount++;
-			}
-
-			if (now - lastUpdateTime > TIME_BETWEEN_UPDATES) {
-				lastUpdateTime = now - TIME_BETWEEN_UPDATES;
-			}
-
-			render();
-			
-			frameCount ++;
-
-			lastRenderTime = now;
-
-			int thisSecond = (int) (lastUpdateTime / 1000000000);
-			if (thisSecond > lastSecondTime) {
-				fps = frameCount;
-				frameCount = 0;
-				ups = updateCount;
-				lastSecondTime = thisSecond;
-			}
-
-			while ((now - lastRenderTime) < TARGET_TIME_BETWEEN_RENDERS
-					&& (now - lastUpdateTime) < TIME_BETWEEN_UPDATES) {
-				Thread.yield();
-				try {Thread.sleep(1);} catch (Exception e) {}
-				now = System.nanoTime();
+			if (!paused) {
+	 			double now = System.nanoTime();
+				int updateCount = 0;
+	
+				while (now - lastUpdateTime > TIME_BETWEEN_UPDATES
+						&& updateCount < MAX_UPDATES_BEFORE_RENDER) {
+					update();
+					lastUpdateTime += TIME_BETWEEN_UPDATES;
+					updateCount++;
+				}
+	
+				if (now - lastUpdateTime > TIME_BETWEEN_UPDATES) {
+					lastUpdateTime = now - TIME_BETWEEN_UPDATES;
+				}
+	
+				render();
+				
+				frameCount ++;
+	
+				lastRenderTime = now;
+	
+				int thisSecond = (int) (lastUpdateTime / 1000000000);
+				if (thisSecond > lastSecondTime) {
+					fps = frameCount;
+					frameCount = 0;
+					ups = updateCount;
+					lastSecondTime = thisSecond;
+				}
+	
+				while ((now - lastRenderTime) < TARGET_TIME_BETWEEN_RENDERS
+						&& (now - lastUpdateTime) < TIME_BETWEEN_UPDATES) {
+					Thread.yield();
+					try {Thread.sleep(1);} catch (Exception e) {}
+					now = System.nanoTime();
+				}
+			} else {
+				try {Thread.sleep(250);} catch (Exception e) {}
 			}
 		}
 		stop();
@@ -89,6 +93,14 @@ public abstract class Loop implements Runnable {
 	
 	public int getUps() {
 		return ups;
+	}
+	
+	public void pause() {
+		paused = true;
+	}
+	
+	public void resume() {
+		paused = false;
 	}
 
 }

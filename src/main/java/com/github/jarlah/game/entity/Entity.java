@@ -18,6 +18,13 @@ public abstract class Entity {
 		this.y = y;
 	}
 	
+	public void stop() {
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+	}
+	
 	public abstract void update();
 	public abstract void render(Graphics g);
 }
