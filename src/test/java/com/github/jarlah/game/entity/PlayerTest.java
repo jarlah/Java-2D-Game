@@ -13,6 +13,40 @@ public class PlayerTest {
 	double y = 124.0;
 	
 	@Test
+	public void playerStopsWhenBothLeftAndRightIsPressed() {
+		// Given:
+		Player player = new Player(speed, x, y);
+		
+		// When:
+		assertTrue(player.animation.isStopped());
+		player.keyPressed(KeyEvent.VK_LEFT);
+		player.keyPressed(KeyEvent.VK_RIGHT);
+		player.update();
+		
+		// Then:
+		assertEquals(x, player.x, 0); 
+		assertEquals(player.animation, player.walkRightAn);
+		assertTrue(player.animation.isStopped());
+	}
+	
+	@Test
+	public void playerStopsWhenBothUpAndDownIsPressed() {
+		// Given:
+		Player player = new Player(speed, x, y);
+		
+		// When:
+		assertTrue(player.animation.isStopped());
+		player.keyPressed(KeyEvent.VK_UP);
+		player.keyPressed(KeyEvent.VK_DOWN);
+		player.update();
+		
+		// Then:
+		assertEquals(x, player.x, 0); 
+		assertEquals(player.animation, player.walkDownAn);
+		assertTrue(player.animation.isStopped());
+	}
+	
+	@Test
 	public void playerCanMoveLeft() {
 		// Given:
 		Player player = new Player(speed, x, y);
