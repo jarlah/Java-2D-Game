@@ -24,7 +24,7 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(x - speed, player.x, 0); 
-		assertEquals(PlayerStateEngine.WALKING_LEFT, player.state);
+		assertEquals(PlayerStateManager.WALKING_LEFT, player.state);
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(y - speed, player.y, 0); 
-		assertEquals(PlayerStateEngine.WALKING_UP, player.state);
+		assertEquals(PlayerStateManager.WALKING_UP, player.state);
 	}
 	
 	@Test
@@ -53,10 +53,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(x - speed, player.x, 0); 
-		assertEquals(PlayerStateEngine.WALKING_LEFT, player.state);
+		assertEquals(PlayerStateManager.WALKING_LEFT, player.state);
 		player.keyReleased(KeyEvent.VK_LEFT);
 		player.update();
-		assertEquals(PlayerStateEngine.STANDING, player.state);
+		assertEquals(PlayerStateManager.STANDING, player.state);
 	}
 	
 	@Test
@@ -70,10 +70,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(x + speed, player.x, 0); 
-		assertEquals(PlayerStateEngine.WALKING_RIGHT, player.state);
+		assertEquals(PlayerStateManager.WALKING_RIGHT, player.state);
 		player.keyReleased(KeyEvent.VK_RIGHT);
 		player.update();
-		assertEquals(PlayerStateEngine.STANDING, player.state);
+		assertEquals(PlayerStateManager.STANDING, player.state);
 	}
 	
 	@Test
@@ -87,10 +87,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(y - speed, player.y, 0); 
-		assertEquals(PlayerStateEngine.WALKING_UP, player.state);
+		assertEquals(PlayerStateManager.WALKING_UP, player.state);
 		player.keyReleased(KeyEvent.VK_UP);
 		player.update();
-		assertEquals(PlayerStateEngine.STANDING, player.state);
+		assertEquals(PlayerStateManager.STANDING, player.state);
 	}
 	
 	@Test
@@ -104,9 +104,9 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(y + speed, player.y, 0); 
-		assertEquals(PlayerStateEngine.WALKING_DOWN, player.state);
+		assertEquals(PlayerStateManager.WALKING_DOWN, player.state);
 		player.keyReleased(KeyEvent.VK_DOWN);
 		player.update();
-		assertEquals(PlayerStateEngine.STANDING, player.state);
+		assertEquals(PlayerStateManager.STANDING, player.state);
 	}
 }

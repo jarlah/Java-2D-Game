@@ -1,7 +1,6 @@
 package com.github.jarlah.game;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
@@ -16,7 +15,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-import com.github.jarlah.game.entity.Player;
+import com.github.jarlah.game.state.GameStateManager;
 
 public class Game extends Loop implements KeyListener, MouseListener, MouseMotionListener, FocusListener {
 	private final static String TITLE = "Rain";
@@ -24,7 +23,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 	private final JFrame window;
 	private final Canvas canvas;
 	private final BufferedImage image;
-	private final Player player;
+	private final GameStateManager gsm;
 	
 	public Game(String title) {
 		super(TITLE);
@@ -43,7 +42,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 		this.canvas.addKeyListener(this);
 		this.canvas.addMouseListener(this);
 		this.canvas.addMouseMotionListener(this);
-		this.player = new Player(1.4, 100, 100);
+		this.gsm = GameStateManager.getInstance();
 		this.canvas.requestFocus();
 		this.canvas.addFocusListener(this);
 	}
@@ -55,7 +54,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 
 	@Override
 	public void update() {
-		player.update();
+		gsm.update();
 	}
 
 	@Override
@@ -67,9 +66,8 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 		}
 		
 		Graphics g2d = image.getGraphics();
-		g2d.setColor(Color.BLACK);
-		g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		player.render(g2d);
+		gsm.render(g2d);
+		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
 		window.setTitle(TITLE + " | " + getFps() + " fps, " + getUps() + " update" + (getUps() > 1 ? " catchup" : "") + " per render");
@@ -79,72 +77,48 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void keyPressed(KeyEvent e) {
-		player.keyPressed(e.getKeyCode());
+		gsm.keyPressed(e.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		player.keyReleased(e.getKeyCode());
+		gsm.keyReleased(e.getKeyCode());
 	}
 
 	@Override
 	public void focusGained(FocusEvent e) {
 		resume();
+		gsm.focusGained();
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		player.stop();
+		gsm.focusLost();
 		pause();
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
 }

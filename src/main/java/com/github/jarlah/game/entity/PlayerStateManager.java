@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import com.github.jarlah.game.gfx.Animation;
 
 
-public enum PlayerStateEngine implements PlayerState {
+public enum PlayerStateManager implements PlayerState {
 	STANDING(0, 0, STANDING_STILL_ANIMATION) {
 		@Override
 		public void reset(Entity context) {
@@ -96,7 +96,7 @@ public enum PlayerStateEngine implements PlayerState {
 	private final Animation animation;
 	private final double speedX, speedY;
 
-	private PlayerStateEngine(double speedX, double speedY, Animation animation) {
+	private PlayerStateManager(double speedX, double speedY, Animation animation) {
 		this.animation = animation;
 		this.speedX = speedX;
 		this.speedY = speedY;
@@ -110,9 +110,7 @@ public enum PlayerStateEngine implements PlayerState {
 	
 	public void update(Entity context) {
 		animation.update();
-		if (animation.getFrameDelay() > 0) {
-			animation.start();
-		}
+		animation.start();
 		context.x += speedX;
 		context.y += speedY;
 	}
