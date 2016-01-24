@@ -17,13 +17,13 @@ public enum PlayerStateManager implements PlayerState {
 				context.state = WALKING_UP_RIGHT;
 			} else if (context.down && context.right && !context.left && !context.up) {
 				context.state = WALKING_DOWN_RIGHT;
-			} else if (context.up) {
+			} else if (context.up && !context.down) {
 				context.state = WALKING_UP;
-			} else if (context.down) {
+			} else if (context.down && !context.up) {
 				context.state = WALKING_DOWN;
-			} else if (context.left) {
+			} else if (context.left && !context.right) {
 				context.state = WALKING_LEFT;
-			} else if (context.right) {
+			} else if (context.right && !context.left) {
 				context.state = WALKING_RIGHT;
 			}
 		}
