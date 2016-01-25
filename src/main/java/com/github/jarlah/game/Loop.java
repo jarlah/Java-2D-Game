@@ -3,7 +3,7 @@ package com.github.jarlah.game;
 public abstract class Loop implements Runnable {
 	private static final double GAME_HERTZ = 60.0;
 	private static final double TIME_BETWEEN_UPDATES = 1000000000.0 / GAME_HERTZ;
-	private static final double TARGET_FPS = 120.0;
+	private static final double TARGET_FPS = 60.0;
 	private static final double TARGET_TIME_BETWEEN_RENDERS = 1000000000.0 / TARGET_FPS;
 	private static final double MAX_UPDATES_BEFORE_RENDER = 5;
 	

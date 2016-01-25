@@ -18,6 +18,7 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
+		assertEquals(PlayerState.STANDING_DOWN, player.state);
 		player.keyPressed(KeyEvent.VK_LEFT);
 		player.keyPressed(KeyEvent.VK_RIGHT);
 		player.update();
@@ -33,6 +34,7 @@ public class PlayerTest {
 		Player player = new Player(speed, x, y);
 		
 		// When:
+		assertEquals(PlayerState.STANDING_DOWN, player.state);
 		player.keyPressed(KeyEvent.VK_UP);
 		player.keyPressed(KeyEvent.VK_DOWN);
 		player.update();
