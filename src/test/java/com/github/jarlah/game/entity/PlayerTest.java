@@ -13,7 +13,7 @@ public class PlayerTest {
 	double y = 124.0;
 	
 	@Test
-	public void pressingRightWhileGoingLeftHasNoEfect() {
+	public void pressingRightAndLeftAtSameTimeHasNoEfect() {
 		// Given:
 		Player player = new Player(speed, x, y);
 		
@@ -23,12 +23,12 @@ public class PlayerTest {
 		player.update();
 		
 		// Then:
-		assertEquals(x - speed, player.x, 0); 
-		assertEquals(PlayerStateManager.WALKING_LEFT, player.state);
+		assertEquals(x, player.x, 0); 
+		assertEquals(PlayerState.STANDING_DOWN, player.state);
 	}
 	
 	@Test
-	public void pressingDownWhileGoingUpHasNoEfect() {
+	public void pressingDownAndUpAtSameTimeHasNoEfect() {
 		// Given:
 		Player player = new Player(speed, x, y);
 		
@@ -38,8 +38,8 @@ public class PlayerTest {
 		player.update();
 		
 		// Then:
-		assertEquals(y - speed, player.y, 0); 
-		assertEquals(PlayerStateManager.WALKING_UP, player.state);
+		assertEquals(y, player.y, 0); 
+		assertEquals(PlayerState.STANDING_DOWN, player.state);
 	}
 	
 	@Test
@@ -53,10 +53,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(x - speed, player.x, 0); 
-		assertEquals(PlayerStateManager.WALKING_LEFT, player.state);
+		assertEquals(PlayerState.WALKING_LEFT, player.state);
 		player.keyReleased(KeyEvent.VK_LEFT);
 		player.update();
-		assertEquals(PlayerStateManager.STANDING, player.state);
+		assertEquals(PlayerState.STANDING_LEFT, player.state);
 	}
 	
 	@Test
@@ -70,10 +70,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(x + speed, player.x, 0); 
-		assertEquals(PlayerStateManager.WALKING_RIGHT, player.state);
+		assertEquals(PlayerState.WALKING_RIGHT, player.state);
 		player.keyReleased(KeyEvent.VK_RIGHT);
 		player.update();
-		assertEquals(PlayerStateManager.STANDING, player.state);
+		assertEquals(PlayerState.STANDING_RIGHT, player.state);
 	}
 	
 	@Test
@@ -87,10 +87,10 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(y - speed, player.y, 0); 
-		assertEquals(PlayerStateManager.WALKING_UP, player.state);
+		assertEquals(PlayerState.WALKING_UP, player.state);
 		player.keyReleased(KeyEvent.VK_UP);
 		player.update();
-		assertEquals(PlayerStateManager.STANDING, player.state);
+		assertEquals(PlayerState.STANDING_UP, player.state);
 	}
 	
 	@Test
@@ -104,9 +104,9 @@ public class PlayerTest {
 		
 		// Then:
 		assertEquals(y + speed, player.y, 0); 
-		assertEquals(PlayerStateManager.WALKING_DOWN, player.state);
+		assertEquals(PlayerState.WALKING_DOWN, player.state);
 		player.keyReleased(KeyEvent.VK_DOWN);
 		player.update();
-		assertEquals(PlayerStateManager.STANDING, player.state);
+		assertEquals(PlayerState.STANDING_DOWN, player.state);
 	}
 }

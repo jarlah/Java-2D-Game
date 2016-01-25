@@ -18,6 +18,10 @@ public abstract class Entity {
 		this.y = y;
 	}
 	
+	public boolean isMoving() {
+		return up || down || left || right;
+	}
+	
 	public void stop() {
 		up = false;
 		down = false;

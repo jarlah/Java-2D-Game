@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class Player extends Entity {
 	public Player(double speed, double x, double y) {
 		super(speed, x, y);
-		state = PlayerStateManager.STANDING;
+		state = PlayerState.STANDING_DOWN;
 	}
 
 	public void keyPressed(int code) {

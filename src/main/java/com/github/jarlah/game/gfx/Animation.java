@@ -69,11 +69,6 @@ public class Animation {
     }
 
     private void addFrame(BufferedImage frame, int duration) {
-        if (duration <= 0) {
-            System.err.println("Invalid duration: " + duration);
-            throw new RuntimeException("Invalid duration: " + duration);
-        }
-
         frames.add(new Frame(frame, duration));
         currentFrame = 0;
     }
