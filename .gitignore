@@ -1,2 +1,4 @@
 /.apt_generated/
 /bin/
+.idea
+target
