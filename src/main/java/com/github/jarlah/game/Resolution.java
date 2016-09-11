@@ -1,13 +1,13 @@
 package com.github.jarlah.game;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 public class Resolution {
-	public static int PIXEL_WIDTH = 300;
-	public static int PIXEL_HEIGHT = 168;
-	public static int SCALE = 3;
+    public static int PIXEL_WIDTH = 300;
+    public static int PIXEL_HEIGHT = 168;
+    public static int SCALE = 3;
 
-	static Dimension getDimension() {
-		return new Dimension(PIXEL_WIDTH * SCALE, PIXEL_HEIGHT * SCALE);
-	}
+    static Dimension getDimension() {
+        return new Dimension(PIXEL_WIDTH * SCALE, PIXEL_HEIGHT * SCALE);
+    }
 }

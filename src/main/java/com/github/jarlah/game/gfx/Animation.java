@@ -57,8 +57,7 @@ public class Animation {
 
                 if (currentFrame > totalFrames - 1) {
                     currentFrame = 0;
-                }
-                else if (currentFrame < 0) {
+                } else if (currentFrame < 0) {
                     currentFrame = totalFrames - 1;
                 }
             }
@@ -66,8 +65,8 @@ public class Animation {
 
     }
 
-	int getCurrentFrame() {
-		return currentFrame;
-	}
+    int getCurrentFrame() {
+        return currentFrame;
+    }
 
 }

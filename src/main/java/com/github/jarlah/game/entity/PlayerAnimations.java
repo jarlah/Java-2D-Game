@@ -1,9 +1,9 @@
 package com.github.jarlah.game.entity;
 
-import java.awt.image.BufferedImage;
-
 import com.github.jarlah.game.gfx.Animation;
 import com.github.jarlah.game.gfx.Sprites;
+
+import java.awt.image.BufferedImage;
 
 interface PlayerAnimations {
     String SPRITE_SHEET = "player";
@@ -14,8 +14,8 @@ interface PlayerAnimations {
     // The animation states
     Animation WALKING_UP_ANIMATION = new Animation(
             new BufferedImage[]{
-                Sprites.getSprite(SPRITE_SHEET, SPRITE_WIDTH, SPRITE_HEIGHT, 0, 3),
-                Sprites.getSprite(SPRITE_SHEET, SPRITE_WIDTH, SPRITE_HEIGHT, 2, 3)
+                    Sprites.getSprite(SPRITE_SHEET, SPRITE_WIDTH, SPRITE_HEIGHT, 0, 3),
+                    Sprites.getSprite(SPRITE_SHEET, SPRITE_WIDTH, SPRITE_HEIGHT, 2, 3)
             }, 10);
 
     Animation STANDING_UP_ANIMATION = new Animation(
