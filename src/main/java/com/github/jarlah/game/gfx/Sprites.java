@@ -1,10 +1,7 @@
 package com.github.jarlah.game.gfx;
 
-import sun.rmi.rmic.iiop.ClassPathLoader;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +11,7 @@ public class Sprites {
 
     private static BufferedImage loadSprite(String file) {
         try {
-            return ImageIO.read(ClassPathLoader.getSystemResourceAsStream(file + ".png"));
+            return ImageIO.read(ClassLoader.getSystemResourceAsStream(file + ".png"));
         } catch (IOException e) {
             throw new IllegalArgumentException("Sprite " + file + " was not found");
         }
