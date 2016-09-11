@@ -38,11 +38,6 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
         this.canvas.addFocusListener(this);
     }
 
-    public static void main(String[] args) {
-        Game game = new Game("Rain");
-        game.start();
-    }
-
     @Override
     public void update() {
         gsm.update();

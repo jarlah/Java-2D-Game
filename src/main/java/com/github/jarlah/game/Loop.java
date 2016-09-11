@@ -17,7 +17,7 @@ abstract class Loop implements Runnable {
         this.running = false;
     }
 
-    synchronized void start() {
+    public synchronized void start() {
         this.running = true;
         this.thread = new Thread(this, name);
         this.thread.start();
