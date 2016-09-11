@@ -47,7 +47,7 @@ public class GameStateManager {
 		state.focusGained();
 	}
 
-	public final void setState(GameState newState) {
+	public void setState(GameState newState) {
 		state = newState;
 	}
 }

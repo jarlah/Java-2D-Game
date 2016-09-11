@@ -15,7 +15,7 @@ public class PlayerTest {
 	@Test
 	public void pressingRightAndLeftAtSameTimeHasNoEfect() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		assertEquals(PlayerState.STANDING_DOWN, player.state);
@@ -31,7 +31,7 @@ public class PlayerTest {
 	@Test
 	public void pressingDownAndUpAtSameTimeHasNoEfect() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		assertEquals(PlayerState.STANDING_DOWN, player.state);
@@ -47,7 +47,7 @@ public class PlayerTest {
 	@Test
 	public void playerCanMoveLeft() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		player.keyPressed(KeyEvent.VK_LEFT);
@@ -64,7 +64,7 @@ public class PlayerTest {
 	@Test
 	public void playerCanMoveRight() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		player.keyPressed(KeyEvent.VK_RIGHT);
@@ -81,7 +81,7 @@ public class PlayerTest {
 	@Test
 	public void playerCanMoveUp() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		player.keyPressed(KeyEvent.VK_UP);
@@ -98,7 +98,7 @@ public class PlayerTest {
 	@Test
 	public void playerCanMoveDown() {
 		// Given:
-		Player player = new Player(speed, x, y);
+		Player player = new Player(x, y);
 		
 		// When:
 		player.keyPressed(KeyEvent.VK_DOWN);

@@ -10,7 +10,7 @@ import com.github.jarlah.game.gfx.Animation;
  * @author jarlah
  *
  */
-public enum PlayerState implements PlayerAnimations {
+enum PlayerState implements PlayerAnimations {
 	STANDING_LEFT(0, 0, STANDING_LEFT_ANIMATION),
 	STANDING_RIGHT(0, 0, STANDING_RIGHT_ANIMATION),
 	STANDING_DOWN(0, 0, STANDING_DOWN_ANIMATION),
@@ -27,7 +27,7 @@ public enum PlayerState implements PlayerAnimations {
 	private final Animation animation;
 	private final double speedX, speedY;
 
-	private PlayerState(double speedX, double speedY, Animation animation) {
+	PlayerState(double speedX, double speedY, Animation animation) {
 		this.animation = animation;
 		this.speedX = speedX;
 		this.speedY = speedY;

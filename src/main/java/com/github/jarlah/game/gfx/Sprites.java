@@ -11,26 +11,19 @@ import javax.imageio.ImageIO;
 public class Sprites {
     private static Map<String, BufferedImage> spriteSheets;
 
-    public static BufferedImage loadSprite(String file) {
-
-        BufferedImage sprite = null;
-
+    private static BufferedImage loadSprite(String file) {
         try {
-            sprite = ImageIO.read(new File("res/" + file + ".png"));
+            return ImageIO.read(new File("res/" + file + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Sprite " + file + " was not found");
         }
-
-        return sprite;
     }
 
     public static BufferedImage getSprite(String path, int width, int height, int xGrid, int yGrid) {
-
         if (spriteSheets == null) {
         	spriteSheets = new HashMap<>();
             spriteSheets.put(path, loadSprite(path));
         }
-
         return spriteSheets.get(path).getSubimage(xGrid * width, yGrid * height, width, height);
     }
 

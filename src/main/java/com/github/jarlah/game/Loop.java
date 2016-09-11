@@ -1,6 +1,6 @@
 package com.github.jarlah.game;
 
-public abstract class Loop implements Runnable {
+abstract class Loop implements Runnable {
 	private static final double GAME_HERTZ = 60.0;
 	private static final double TIME_BETWEEN_UPDATES = 1000000000.0 / GAME_HERTZ;
 	private static final double TARGET_FPS = 60.0;
@@ -12,18 +12,18 @@ public abstract class Loop implements Runnable {
 	private boolean running, paused;
 	private int fps, ups;
 	
-	public Loop(String name) {
+	Loop(String name) {
 		this.name = name;
 		this.running = false;
 	}
 	
-	public synchronized void start() {
+	synchronized void start() {
 		this.running = true;
 		this.thread = new Thread(this, name);
 		this.thread.start();
 	}
 	
-	public synchronized void stop() {
+	private synchronized void stop() {
 		this.running = false;
 		try {
 			this.thread.join();
@@ -37,31 +37,29 @@ public abstract class Loop implements Runnable {
 		int frameCount = 0;
 		
 		double lastUpdateTime = System.nanoTime();
-		double lastRenderTime = System.nanoTime();
+		double lastRenderTime;
 		
 		int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
 		while (running) {
 			if (!paused) {
-	 			double now = System.nanoTime();
+	 			lastRenderTime = System.nanoTime();
 				int updateCount = 0;
 	
-				while (now - lastUpdateTime > TIME_BETWEEN_UPDATES
+				while (lastRenderTime - lastUpdateTime > TIME_BETWEEN_UPDATES
 						&& updateCount < MAX_UPDATES_BEFORE_RENDER) {
 					update();
 					lastUpdateTime += TIME_BETWEEN_UPDATES;
 					updateCount++;
 				}
 	
-				if (now - lastUpdateTime > TIME_BETWEEN_UPDATES) {
-					lastUpdateTime = now - TIME_BETWEEN_UPDATES;
+				if (lastRenderTime - lastUpdateTime > TIME_BETWEEN_UPDATES) {
+					lastUpdateTime = lastRenderTime - TIME_BETWEEN_UPDATES;
 				}
 	
 				render();
 				
 				frameCount ++;
-	
-				lastRenderTime = now;
 	
 				int thisSecond = (int) (lastUpdateTime / 1000000000);
 				if (thisSecond > lastSecondTime) {
@@ -71,14 +69,14 @@ public abstract class Loop implements Runnable {
 					lastSecondTime = thisSecond;
 				}
 	
-				while ((now - lastRenderTime) < TARGET_TIME_BETWEEN_RENDERS
-						&& (now - lastUpdateTime) < TIME_BETWEEN_UPDATES) {
+				while ((lastRenderTime - lastRenderTime) < TARGET_TIME_BETWEEN_RENDERS
+						&& (lastRenderTime - lastUpdateTime) < TIME_BETWEEN_UPDATES) {
 					Thread.yield();
-					try {Thread.sleep(1);} catch (Exception e) {}
-					now = System.nanoTime();
+					try {Thread.sleep(1);} catch (Exception ignored) {}
+					lastRenderTime = System.nanoTime();
 				}
 			} else {
-				try {Thread.sleep(250);} catch (Exception e) {}
+				try {Thread.sleep(250);} catch (Exception ignored) {}
 			}
 		}
 		stop();
@@ -87,19 +85,19 @@ public abstract class Loop implements Runnable {
 	public abstract void update();
 	public abstract void render();
 
-	public int getFps() {
+	int getFps() {
 		return fps;
 	}
 	
-	public int getUps() {
+	int getUps() {
 		return ups;
 	}
 	
-	public void pause() {
+	void pause() {
 		paused = true;
 	}
-	
-	public void resume() {
+
+	void resume() {
 		paused = false;
 	}
 

@@ -13,7 +13,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import com.github.jarlah.game.state.GameStateManager;
 
@@ -36,7 +36,7 @@ public class Game extends Loop implements KeyListener, MouseListener, MouseMotio
 		this.window.setResizable(false);
 		this.window.add(canvas);
 		this.window.pack();
-		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.window.setLocationRelativeTo(null);
 		this.window.setVisible(true);
 		this.canvas.addKeyListener(this);

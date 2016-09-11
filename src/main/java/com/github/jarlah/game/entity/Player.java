@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
-	public Player(double speed, double x, double y) {
-		super(speed, x, y);
+	public Player(double x, double y) {
+		super(x, y);
 		state = PlayerState.STANDING_DOWN;
 	}
 
@@ -30,6 +30,13 @@ public class Player extends Entity {
 		if (code == KeyEvent.VK_DOWN || code == KeyEvent.VK_S) {
 			this.down = !released;
 		}
+	}
+
+	public void stop() {
+		this.down = false;
+		this.up = false;
+		this.left = false;
+		this.right = false;
 	}
 
 	public void update() {

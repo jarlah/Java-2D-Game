@@ -38,7 +38,7 @@ public enum GameState {
 			}
 		}
 	}, LEVEL1 {
-		Player player = new Player(1.4, 100, 100);
+		Player player = new Player(100, 100);
 		
 		public void update() {
 			player.update();
@@ -54,6 +54,7 @@ public enum GameState {
 		
 		public void keyPressed(int code) {
 			if (code == KeyEvent.VK_ESCAPE) {
+				player.stop();
 				GameStateManager.getInstance().setState(GameState.PAUSED);
 			} else {
 				player.keyPressed(code);
